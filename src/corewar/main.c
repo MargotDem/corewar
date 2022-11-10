@@ -6,23 +6,40 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:24:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/10 11:30:09 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:06:27 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
 #include "../../includes/corewar.h"
 
-#include <stdio.h>
+void	free_filenames(t_args *args)
+{
+	size_t	i;
 
+	i = 0;
+	while (i < 4)
+	{
+		ft_strdel(&args->filenames[i]);
+		i++;
+	}
+}
 
-//void print_usage()
+void error_exit(char *err_msg, t_args *args)
+{
+	free_filenames(args);
+	ft_putendl_fd(err_msg, 2);
+	exit (1);
+}
+
 static void get_filename(char **argv, t_args *args, int i)
 {
 	args->filenames[args->player_count] = ft_strdup(argv[i]);
+	if (args->filenames[args->player_count] == NULL)
+		error_exit("Memory allocation", args);
 	args->player_count++;
 	if (args->player_count > MAX_PLAYERS)
-		ft_printf(" more than 4 players usage\n");//exit
+		error_exit("More than 4 players", args);
 }
 
 static void get_n_option(char **argv, t_args *args, int *i)
@@ -34,26 +51,26 @@ static void get_n_option(char **argv, t_args *args, int *i)
 	{
 		champ_num = ft_atoi(argv[*i]);
 		if (!(champ_num > 0 && champ_num < 5))
-			ft_printf("usage\n");//exit
+			error_exit("print usage here", args);
 		args->numbers[args->player_count] = champ_num;
 		(*i)++;
 		if (ft_strstr(argv[*i], ".cor") != NULL)
 			get_filename(argv, args, *i);
 		else
-			ft_printf("wrong file name\n");//exit
+			error_exit("Wrong file name", args);
 	}
 	else
-		ft_printf("no int after -n flag\n");//exit
+		error_exit("no int after -n flag", args);
 }
 
 static void get_dump_option(char **argv, t_args *args, int *i)
 {
 	(*i)++;
 	if (!ft_isint(argv[*i]))
-		ft_printf("dump cycle is not int\n");
+		error_exit("Dump cycle is not integer", args);
 	args->dump_cycle = ft_atoi(argv[*i]);
 	if (args->dump_cycle > CYCLE_TO_DIE || args->dump_cycle < 0)
-		ft_printf("wrong cycle number\n");//exit
+		error_exit("Wrong cycle number", args);
 }
 
 int	get_args(int argc, char **argv, t_args *args)
@@ -70,7 +87,7 @@ int	get_args(int argc, char **argv, t_args *args)
 		else if (ft_strequ(argv[i], "-dump"))
 			get_dump_option(argv, args, &i);
 		else
-			ft_printf("usage\n"); //TODO free
+			error_exit("Print usage here", args);
 		i++;
 	}
 	
@@ -92,12 +109,12 @@ void verify_args(t_args *args)
 	while (i < 4)
 	{
 		if (args->numbers[i] > args->player_count)
-			ft_printf("nb cannot be more than players \n"); //exit
+			error_exit("Given player number is more than the player number", args);
 		j = i + 1;
 		while (j < 4)
 		{
 			if (args->numbers[i] == args->numbers[j] && args->numbers[i] != 0)
-				ft_printf("players cant have same nb\n"); //exit
+				error_exit("Two players have same number", args);
 			j++;
 		}
 		i++;
@@ -136,6 +153,8 @@ void set_player_order(t_args *args)
 	unsigned short int	*table;
 
 	table = (unsigned short int *)ft_memalloc(sizeof(unsigned short int) * 5);
+	if (table == NULL)
+		error_exit("Memory allocation", args);
 	i = 0;
 	while (i < args->player_count)
 	{
@@ -143,6 +162,7 @@ void set_player_order(t_args *args)
 		i++; 
 	}
 	set_order(args, table);
+	free(table);
 }
 
 void print_player_order(t_args args)
@@ -154,6 +174,11 @@ void print_player_order(t_args args)
 
 void parse_args(int argc, char **argv, t_args *args)
 {
+	if (argc == 1)
+	{
+		ft_putendl("Print usage here");
+		exit (1);
+	}
 	init_args(args);
 	get_args(argc, argv, args);
 	verify_args(args);
