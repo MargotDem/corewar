@@ -5,7 +5,7 @@
 ./corewar player1.cor player2.cor player3.cor player4.cor
 ./corewar -n 3 player1.cor -n 2 player2.cor -n 1 player3.cor -n 4 player4.cor
 ./corewar -n 3 player1.cor -n 2 player2.cor player3.cor player4.cor
-./corewar -n 3 player1.cor player2.cor player3.cor player4.cor
+./corewar player1.cor -n 3 player2.cor player3.cor player4.cor
 ./corewar -dump 30 player1.cor player2.cor player3.cor
 ./corewar -dump 30 -n 3 player1.cor -n 2 player2.cor -n 1 player3.cor -n 4 player4.cor
 ./corewar player1.cor player1.cor
@@ -14,7 +14,7 @@
 
 ------WRONG-------
 ./corewar player1.cor player2.cor player3.cor player4.cor player4.cor
-./corewar -n 1 player1.cor -n 1 player2.cor -n 1 player1.cor -n 1 player2.cor
+./corewar -n 1 player1.cor -n 1 player2.cor -n 2 player1.cor -n 3 player2.cor
 ./corewar -n 10 player1.cor player2.cor -n 2 player1.cor player2.cor
 ./corewar -n 3 player1.cor -n 1 player2.cor
 ./corewar -dump 2000 player1.cor player2.cor

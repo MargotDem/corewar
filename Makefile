@@ -6,7 +6,7 @@
 #    By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/04 14:51:24 by bkandemi          #+#    #+#              #
-#    Updated: 2022/11/08 11:54:43 by bkandemi         ###   ########.fr        #
+#    Updated: 2022/11/09 09:20:32 by bkandemi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,25 +32,22 @@ LIB = $(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
 all : $(NAME)
 
-$(NAME): $(OBJ) $(INC)
-	make -C $(LIBFT_DIR)
+$(NAME): $(OBJ) $(INC) $(LIBFT_LIB)
 	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(LIBFT_LIB):
+	make -C $(LIBFT_DIR)
+
 clean:
 	make -C $(LIBFT_DIR) clean
 	rm -rf $(OBJ_DIR)
  
 fclean: clean
-	@make -C $(LIBFT_DIR) clean
+	@make -C $(LIBFT_DIR) fclean
 	@rm -f $(NAME)
-
-debug:
-	@make -C libft/ fclean && make -C libft/
-	@$(CC_DEBUG) $(CFLAGS) -c $(C_FILES)
-	@$(CC_DEBUG) $(CFLAGS) $(O_FILES) libft/libft.a -o $(NAME)
 
 re:	fclean all
