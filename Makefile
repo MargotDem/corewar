@@ -6,7 +6,7 @@
 #    By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/04 14:51:24 by bkandemi          #+#    #+#              #
-#    Updated: 2022/11/09 09:20:32 by bkandemi         ###   ########.fr        #
+#    Updated: 2022/11/10 15:38:13 by bkandemi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,10 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
 SRC_DIR = ./src/corewar/
-SRC_FILES = main.c
+SRC_FILES = main.c\
+			exit.c\
+			parse_args.c\
+			set_player_order.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ_DIR = ./obj/

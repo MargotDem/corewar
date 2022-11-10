@@ -1,36 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/03 09:24:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/10 15:06:27 by bkandemi         ###   ########.fr       */
+/*   Created: 2022/11/10 15:08:31 by bkandemi          #+#    #+#             */
+/*   Updated: 2022/11/10 15:39:06 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
 #include "../../includes/corewar.h"
-
-void	free_filenames(t_args *args)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		ft_strdel(&args->filenames[i]);
-		i++;
-	}
-}
-
-void error_exit(char *err_msg, t_args *args)
-{
-	free_filenames(args);
-	ft_putendl_fd(err_msg, 2);
-	exit (1);
-}
 
 static void get_filename(char **argv, t_args *args, int i)
 {
@@ -95,11 +76,6 @@ int	get_args(int argc, char **argv, t_args *args)
 	return (1);
 }
 
-void init_args(t_args *args)
-{
-	ft_bzero(args, sizeof(*args));
-}
-
 void verify_args(t_args *args)
 {
 	int	i;
@@ -119,77 +95,4 @@ void verify_args(t_args *args)
 		}
 		i++;
 	}
-}
-
-void set_order(t_args *args, unsigned short int *table)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < 4)
-	{
-		if (args->numbers[i] == 0)
-		{
-			j = args->player_count;
-			while (j > 0)
-			{
-				if (table[j] != 1)
-				{
-					args->numbers[i] = j;
-					table[j] = 1;
-					break;
-				}
-				j--;
-			}
-		}
-		i++;
-	}
-}
-
-void set_player_order(t_args *args)
-{
-	int		i;
-	unsigned short int	*table;
-
-	table = (unsigned short int *)ft_memalloc(sizeof(unsigned short int) * 5);
-	if (table == NULL)
-		error_exit("Memory allocation", args);
-	i = 0;
-	while (i < args->player_count)
-	{
-		table[args->numbers[i]] = 1;
-		i++; 
-	}
-	set_order(args, table);
-	free(table);
-}
-
-void print_player_order(t_args args)
-{
-	for (int i = 0; i < 4; i++)
-		ft_printf("%d-%s\n", args.numbers[i], args.filenames[i]);
-	ft_printf("\nplayer count: %d\n\n", args.player_count);
-}
-
-void parse_args(int argc, char **argv, t_args *args)
-{
-	if (argc == 1)
-	{
-		ft_putendl("Print usage here");
-		exit (1);
-	}
-	init_args(args);
-	get_args(argc, argv, args);
-	verify_args(args);
-	set_player_order(args);
-}
-
-int main(int argc, char **argv)
-{
-	t_args	args;
-
-	parse_args(argc, argv, &args);
-	print_player_order(args);
-	return (0);
 }
