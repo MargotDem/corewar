@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:24:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/10 15:12:59 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/16 11:07:58 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,45 @@ void parse_args(int argc, char **argv, t_args *args)
 	set_player_order(args);
 }
 
+void	read_champ(t_args *args)
+{
+	int		fd;
+	//t_champ	champ;
+	char	buf[MEM_SIZE];
+	int		ret;
+	int i;
+
+	i = 0;
+	while (i < args->player_count)
+	{
+		ft_printf("fn: (%s)\n", args->filenames[i]);
+		fd = open(args->filenames[i], O_RDONLY);
+		if (fd == -1)
+			error_exit("File could not be read", args);
+		ret = read(fd, &buf, MEM_SIZE);
+		close(fd);
+		i++;
+	}
+	// read first 4 bytes convert to int
+	// read 128 byte convert string
+	// read 
+	/*for (int i = 0; i < ret; i++)
+	{
+		ft_printf("%02x ", buf[i]);
+		if (i % 10 == 9)
+			ft_printf("\n");
+	}*/
+	
+	
+}
+
+
 int main(int argc, char **argv)
 {
 	t_args	args;
 
 	parse_args(argc, argv, &args);
 	print_player_order(args);
+	read_champ(&args);
 	return (0);
 }
