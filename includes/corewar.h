@@ -6,17 +6,17 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:26:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/18 10:53:09 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:29:59 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 
-#define MAX_PLAYERS				4
-#define CYCLE_TO_DIE			1536
-#define MEM_SIZE				(4*1024)
-#define IDX_MOD					(MEM_SIZE / 8)
-#define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
+# define MAX_PLAYERS				4
+# define CYCLE_TO_DIE			1536
+# define MEM_SIZE				(4*1024)
+# define IDX_MOD					(MEM_SIZE / 8)
+# define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
@@ -45,8 +45,6 @@ typedef struct s_vm
 	t_champ	champs[MAX_PLAYERS];
 }			t_vm;
 
-
-
 /* parse_args */
 int	get_args(int argc, char **argv, t_vm *vm);
 void verify_args(t_vm *vm);
@@ -54,6 +52,8 @@ void verify_args(t_vm *vm);
 /* set_player_order */
 void set_player_order(t_vm *vm);
 
+/* read_champs */
+void	read_champs(t_vm *vm);
 
 /* exit */
 void error_exit(char *err_msg, t_vm *vm);
