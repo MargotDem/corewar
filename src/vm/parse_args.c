@@ -6,24 +6,24 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:08:31 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/10 15:39:06 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/18 11:08:11 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
 #include "../../includes/corewar.h"
 
-static void get_filename(char **argv, t_args *args, int i)
+static void get_filename(char **argv, t_vm *vm, int i)
 {
-	args->filenames[args->player_count] = ft_strdup(argv[i]);
-	if (args->filenames[args->player_count] == NULL)
-		error_exit("Memory allocation", args);
-	args->player_count++;
-	if (args->player_count > MAX_PLAYERS)
-		error_exit("More than 4 players", args);
+	vm->args.filenames[vm->args.player_count] = ft_strdup(argv[i]);
+	if (vm->args.filenames[vm->args.player_count] == NULL)
+		error_exit("Memory allocation", vm);
+	vm->args.player_count++;
+	if (vm->args.player_count > MAX_PLAYERS)
+		error_exit("More than 4 players", vm);
 }
 
-static void get_n_option(char **argv, t_args *args, int *i)
+static void get_n_option(char **argv, t_vm *vm, int *i)
 {
 	int	champ_num;
 
@@ -32,29 +32,29 @@ static void get_n_option(char **argv, t_args *args, int *i)
 	{
 		champ_num = ft_atoi(argv[*i]);
 		if (!(champ_num > 0 && champ_num < 5))
-			error_exit("print usage here", args);
-		args->numbers[args->player_count] = champ_num;
+			error_exit("print usage here", vm);
+		vm->args.numbers[vm->args.player_count] = champ_num;
 		(*i)++;
 		if (ft_strstr(argv[*i], ".cor") != NULL)
-			get_filename(argv, args, *i);
+			get_filename(argv, vm, *i);
 		else
-			error_exit("Wrong file name", args);
+			error_exit("Wrong file name", vm);
 	}
 	else
-		error_exit("no int after -n flag", args);
+		error_exit("no int after -n flag", vm);
 }
 
-static void get_dump_option(char **argv, t_args *args, int *i)
+static void get_dump_option(char **argv, t_vm *vm, int *i)
 {
 	(*i)++;
 	if (!ft_isint(argv[*i]))
-		error_exit("Dump cycle is not integer", args);
-	args->dump_cycle = ft_atoi(argv[*i]);
-	if (args->dump_cycle > CYCLE_TO_DIE || args->dump_cycle < 0)
-		error_exit("Wrong cycle number", args);
+		error_exit("Dump cycle is not integer", vm);
+	vm->args.dump_cycle = ft_atoi(argv[*i]);
+	if (vm->args.dump_cycle > CYCLE_TO_DIE || vm->args.dump_cycle < 0)
+		error_exit("Wrong cycle number", vm);
 }
 
-int	get_args(int argc, char **argv, t_args *args)
+int	get_args(int argc, char **argv, t_vm *vm)
 {
 	int	i;
 
@@ -62,13 +62,13 @@ int	get_args(int argc, char **argv, t_args *args)
 	while (i < argc)
 	{
 		if (ft_strequ(argv[i], "-n"))
-			get_n_option(argv, args, &i);
+			get_n_option(argv, vm, &i);
 		else if (ft_strstr(argv[i], ".cor") != NULL)
-			get_filename(argv, args, i);
+			get_filename(argv, vm, i);
 		else if (ft_strequ(argv[i], "-dump"))
-			get_dump_option(argv, args, &i);
+			get_dump_option(argv, vm, &i);
 		else
-			error_exit("Print usage here", args);
+			error_exit("Print usage here", vm);
 		i++;
 	}
 	
@@ -76,7 +76,7 @@ int	get_args(int argc, char **argv, t_args *args)
 	return (1);
 }
 
-void verify_args(t_args *args)
+void verify_args(t_vm *vm)
 {
 	int	i;
 	int	j;
@@ -84,13 +84,13 @@ void verify_args(t_args *args)
 	i = 0;
 	while (i < 4)
 	{
-		if (args->numbers[i] > args->player_count)
-			error_exit("Given player number is more than the player number", args);
+		if (vm->args.numbers[i] > vm->args.player_count)
+			error_exit("Given player number is more than the player number", vm);
 		j = i + 1;
 		while (j < 4)
 		{
-			if (args->numbers[i] == args->numbers[j] && args->numbers[i] != 0)
-				error_exit("Two players have same number", args);
+			if (vm->args.numbers[i] == vm->args.numbers[j] && vm->args.numbers[i] != 0)
+				error_exit("Two players have same number", vm);
 			j++;
 		}
 		i++;

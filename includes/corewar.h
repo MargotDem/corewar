@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:26:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/15 11:14:39 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/18 10:53:09 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_args
 
 typedef struct s_champ
 {
-	int		id;
 	int		magic;
 	char	name[PROG_NAME_LENGTH];
 	char	comment[COMMENT_LENGTH];
@@ -40,15 +39,22 @@ typedef struct s_champ
 	char	code[CHAMP_MAX_SIZE];
 }			t_champ;
 
+typedef struct s_vm
+{
+	t_args	args;
+	t_champ	champs[MAX_PLAYERS];
+}			t_vm;
+
+
 
 /* parse_args */
-int	get_args(int argc, char **argv, t_args *args);
-void verify_args(t_args *args);
+int	get_args(int argc, char **argv, t_vm *vm);
+void verify_args(t_vm *vm);
 
 /* set_player_order */
-void set_player_order(t_args *args);
+void set_player_order(t_vm *vm);
 
 
 /* exit */
-void error_exit(char *err_msg, t_args *args);
+void error_exit(char *err_msg, t_vm *vm);
 

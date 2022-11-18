@@ -6,13 +6,13 @@
 #    By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/04 14:51:24 by bkandemi          #+#    #+#              #
-#    Updated: 2022/11/15 10:33:17 by bkandemi         ###   ########.fr        #
+#    Updated: 2022/11/18 10:47:47 by bkandemi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 SRC_DIR = ./src/vm/
 SRC_FILES = main.c\
