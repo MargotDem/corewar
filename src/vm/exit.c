@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:11:31 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/18 10:43:17 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:16:38 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	free_filenames(t_args *args)
 
 void error_exit(char *err_msg, t_vm *vm)
 {
-	free_filenames(vm->args);
+	free_filenames(&vm->args);
 	ft_putendl_fd(err_msg, 2);
 	exit (1);
 }

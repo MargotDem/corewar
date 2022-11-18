@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:26:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/18 12:29:59 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:24:35 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ void set_player_order(t_vm *vm);
 
 /* read_champs */
 void	read_champs(t_vm *vm);
+
+/* place_champs */
+void	place_champs(unsigned char *arena, t_vm *vm);
 
 /* exit */
 void error_exit(char *err_msg, t_vm *vm);

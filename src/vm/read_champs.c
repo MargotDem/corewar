@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:26:48 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/18 12:30:54 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/18 14:17:32 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	read_champs(t_vm *vm)
 	{
 		fd = open(vm->args.filenames[i], O_RDONLY);
 		if (fd == -1)
-			error_exit("File could not be read", vm);
+			error_exit("File can not be read", vm);
 		ret = read(fd, &buf, MEM_SIZE);
 		if (ret < 0)
 			error_exit("Error in reading champ file", vm);
