@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:24:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/18 14:25:51 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:19:08 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,27 @@ void	parse_args(int argc, char **argv, t_vm *vm)
 	set_player_order(vm);
 }
 
+void dump(unsigned char *arena) //hexadecimal format with 32 octets per line.
+{
+	int i;
+	int add;
+
+	i = 0;
+	add = 0;
+	ft_printf("0x0000 :");
+	while (i < MEM_SIZE)
+	{
+		if (i != 0 && i % 32 == 0)
+		{
+			add += 32;
+			ft_printf("\n%#06x :", add);
+		}
+		ft_printf(" %02x", arena[i]); // we can color each player differently
+		i++;
+	}
+	write(1, "\n", 1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_vm			vm;
@@ -48,5 +69,7 @@ int	main(int argc, char **argv)
 	print_player_order(vm.args); //delete later
 	read_champs(&vm);
 	place_champs(arena, &vm);
+	dump(arena);
+
 	return (0);
 }
