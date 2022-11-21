@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:21:42 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/18 14:23:13 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/21 21:43:53 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	print_champs(t_vm vm)
 	i = 0;
 	while (i < vm.args.player_count)
 	{
-		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\n",
 			vm.args.numbers[i], vm.champs[i].code_size,
 			vm.champs[i].name, vm.champs[i].comment);
 		i++;
