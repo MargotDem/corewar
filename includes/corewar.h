@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:26:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/18 14:24:35 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:40:45 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_champ
 	char	comment[COMMENT_LENGTH];
 	int		code_size;
 	char	code[CHAMP_MAX_SIZE];
+	int		id;
 }			t_champ;
 
 typedef struct s_vm
@@ -44,6 +45,11 @@ typedef struct s_vm
 	t_args	args;
 	t_champ	champs[MAX_PLAYERS];
 }			t_vm;
+
+typedef struct s_carriage
+{
+	
+}				t_carriage;
 
 /* parse_args */
 int	get_args(int argc, char **argv, t_vm *vm);

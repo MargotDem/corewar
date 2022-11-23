@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:26:48 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/18 14:17:32 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:42:06 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ void	read_champs(t_vm *vm)
 	unsigned char	buf[MEM_SIZE];
 	int				ret;
 	int				i;
+	int				id;
 
 	i = 0;
+	id = 1;
 	while (i < vm->args.player_count)
 	{
 		fd = open(vm->args.filenames[i], O_RDONLY);
@@ -80,6 +82,8 @@ void	read_champs(t_vm *vm)
 			error_exit("Error in reading champ file", vm);
 		parse_champs(vm, &i, buf);
 		close(fd);
+		vm->champs[i].id = id;
+		id++;
 		i++;
 	}
 }
