@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:24:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/29 09:22:06 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:55:54 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	init_carriages(t_vm *vm)
 	{
 		carriage = (t_carriage *)ft_memalloc(sizeof(*carriage));
 		if (!carriage)
-			exit(1); // malloc
+			error_exit("Malloc error", vm);
 		carriage->id  = vm->champs[i].id;
 		carriage->position = MEM_SIZE / vm->args.player_count * i;
 		carriage->registers[0] = -vm->champs[i].id;
