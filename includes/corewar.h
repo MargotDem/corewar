@@ -6,16 +6,16 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:26:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/23 13:40:45 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/27 22:38:38 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 
-# define MAX_PLAYERS				4
+# define MAX_PLAYERS			4
 # define CYCLE_TO_DIE			1536
 # define MEM_SIZE				(4*1024)
-# define IDX_MOD					(MEM_SIZE / 8)
+# define IDX_MOD				(MEM_SIZE / 8)
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
@@ -40,16 +40,31 @@ typedef struct s_champ
 	int		id;
 }			t_champ;
 
-typedef struct s_vm
-{
-	t_args	args;
-	t_champ	champs[MAX_PLAYERS];
-}			t_vm;
-
 typedef struct s_carriage
 {
-	
-}				t_carriage;
+	int				id;
+	int				carry;
+	unsigned char	opcode;
+	int 			last_live_cycle;
+	int 			remaining_cycles; // cycles before execution
+	int 			position;
+	int				bytes_to_cross;
+	int 			registers[8];
+}					t_carriage;
+
+typedef struct s_vm
+{
+	t_args		args;
+	t_champ		champs[MAX_PLAYERS];
+	t_dynlist	carriages;
+	int			alive_champ;
+	int			cycle_counter;
+	int			cycles_to_die; //if cycles_to_ die > 0 
+	int			check_counter;
+	int			nb_of_live;
+}				t_vm;
+
+
 
 /* parse_args */
 int	get_args(int argc, char **argv, t_vm *vm);

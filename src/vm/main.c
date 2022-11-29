@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:24:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/21 21:39:58 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:22:06 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ void	init_vm(t_vm *vm)
 {
 	ft_bzero(&vm->args, sizeof(vm->args));
 	ft_bzero(&vm->champs, sizeof(vm->champs));
+	ft_bzero(&vm->carriages, sizeof(vm->carriages));
+	
+	vm->alive_champ = 0;
+	vm->cycle_counter = 0;
+	vm->cycles_to_die = CYCLE_TO_DIE;
+	
 }
 
 void	print_player_order(t_args args) //delete later
@@ -59,6 +65,48 @@ void dump(unsigned char *arena) //hexadecimal format with 32 octets per line.
 	write(1, "\n", 1);
 }
 
+int add_carriage(t_carriage *carriage, t_dynlist *alst)
+{
+	t_dblist	*new;
+
+	new = ft_dblstnew_pointer(carriage);
+	if (!new)
+		return (0);
+	ft_dynlstadd(alst, new);
+	return (1);
+}
+
+void	init_carriages(t_vm *vm)
+{
+	int	i;
+	t_carriage	*carriage;
+	
+	i = 0;
+	while (i < vm->args.player_count)
+	{
+		carriage = (t_carriage *)ft_memalloc(sizeof(*carriage));
+		if (!carriage)
+			exit(1); // malloc
+		carriage->id  = vm->champs[i].id;
+		carriage->position = MEM_SIZE / vm->args.player_count * i;
+		carriage->registers[0] = -vm->champs[i].id;
+		add_carriage(carriage, &vm->carriages);
+		i++;
+	}
+}
+
+void print_carriages(t_vm vm)
+{
+	t_dblist *cars = vm.carriages.head;
+	while (cars != NULL)
+	{
+		t_carriage *the_car = cars->content;
+		ft_printf("car id: %d pos: %d\n carry: %d reg[0]: %d\n\n",
+			the_car->id, the_car->position, the_car->carry, the_car->registers[0]);
+		cars = cars->next;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_vm			vm;
@@ -71,5 +119,11 @@ int	main(int argc, char **argv)
 	place_champs(arena, &vm);
 	if (vm.args.dump_cycle != 0) //update later
 		dump(arena);
+	init_carriages(&vm);
+	//game_cycle();
+	/*t_dblist *cars = vm.carriages.head;
+	t_carriage *the_car = cars->next->content;
+	ft_printf("car id: %d pos:%d\n carry %d\n",the_car->id, the_car->position, the_car->carry);*/
+	print_carriages(vm); // just to check, delete later
 	return (0);
 }
