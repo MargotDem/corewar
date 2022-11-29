@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:24:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/29 13:55:54 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/29 14:00:04 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	init_carriages(t_vm *vm)
 	{
 		carriage = (t_carriage *)ft_memalloc(sizeof(*carriage));
 		if (!carriage)
-			error_exit("Malloc error", vm);
+			error_exit("Memory allocation", vm);
 		carriage->id  = vm->champs[i].id;
 		carriage->position = MEM_SIZE / vm->args.player_count * i;
 		carriage->registers[0] = -vm->champs[i].id;
@@ -121,9 +121,6 @@ int	main(int argc, char **argv)
 		dump(arena);
 	init_carriages(&vm);
 	//game_cycle();
-	/*t_dblist *cars = vm.carriages.head;
-	t_carriage *the_car = cars->next->content;
-	ft_printf("car id: %d pos:%d\n carry %d\n",the_car->id, the_car->position, the_car->carry);*/
 	print_carriages(vm); // just to check, delete later
 	return (0);
 }
