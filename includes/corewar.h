@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:26:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/27 22:38:38 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/29 21:51:46 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ void	read_champs(t_vm *vm);
 
 /* place_champs */
 void	place_champs(unsigned char *arena, t_vm *vm);
+
+/* init_carriages */
+int		add_carriage(t_carriage *carriage, t_dynlist *alst);
+void	init_carriages(t_vm *vm);
+
 
 /* exit */
 void error_exit(char *err_msg, t_vm *vm);

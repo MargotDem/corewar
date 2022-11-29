@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:24:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/29 14:00:04 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/29 21:50:26 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,36 +63,6 @@ void dump(unsigned char *arena) //hexadecimal format with 32 octets per line.
 		i++;
 	}
 	write(1, "\n", 1);
-}
-
-int add_carriage(t_carriage *carriage, t_dynlist *alst)
-{
-	t_dblist	*new;
-
-	new = ft_dblstnew_pointer(carriage);
-	if (!new)
-		return (0);
-	ft_dynlstadd(alst, new);
-	return (1);
-}
-
-void	init_carriages(t_vm *vm)
-{
-	int	i;
-	t_carriage	*carriage;
-	
-	i = 0;
-	while (i < vm->args.player_count)
-	{
-		carriage = (t_carriage *)ft_memalloc(sizeof(*carriage));
-		if (!carriage)
-			error_exit("Memory allocation", vm);
-		carriage->id  = vm->champs[i].id;
-		carriage->position = MEM_SIZE / vm->args.player_count * i;
-		carriage->registers[0] = -vm->champs[i].id;
-		add_carriage(carriage, &vm->carriages);
-		i++;
-	}
 }
 
 void print_carriages(t_vm vm)
