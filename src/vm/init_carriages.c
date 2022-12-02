@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 21:49:49 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/29 21:52:21 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:23:19 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	init_carriages(t_vm *vm)
 		carriage->id = vm->champs[i].id;
 		carriage->position = MEM_SIZE / vm->args.player_count * i;
 		carriage->registers[0] = -vm->champs[i].id;
+		carriage->remaining_cycles = -1; //to make sure that it will be set 
 		add_carriage(carriage, &vm->carriages);
 		i++;
 	}
