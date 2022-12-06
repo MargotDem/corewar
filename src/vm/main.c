@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:24:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/02 09:55:52 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/03 18:34:44 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void run_carriages(t_vm *vm, unsigned char *arena)
 		if (the_car->remaining_cycles == 0)
 		{
 			/* Execute the opcode if it is time and update the position of the carriage */
-			//if live make carriage->last_live TRUE
+			//if opcode is live, make carriage->last_live TRUE
 			the_car->remaining_cycles--;
 		}
 		cars = cars->next;
@@ -117,6 +117,11 @@ static void	del_fn(void *content)
 		free(content);
 }
 
+/* 
+* delete dead carriage
+* update cycles_to_die value
+* 
+*/
 void check(t_vm *vm)
 {
 	t_dblist	*cars;
@@ -139,9 +144,10 @@ void check(t_vm *vm)
 		cars = next_car;
 	}
 	if (vm->nb_of_live >= NBR_LIVE || vm->checks >= MAX_CHECKS)//??
+	{
 		vm->cycles_to_die -= CYCLE_DELTA;
-	
-	
+		vm->checks = 0;
+	}
 }
 
 int the_cycle(t_vm *vm, unsigned char *arena)
