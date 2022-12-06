@@ -6,7 +6,7 @@
 #    By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/04 14:51:24 by bkandemi          #+#    #+#              #
-#    Updated: 2022/11/29 21:50:43 by bkandemi         ###   ########.fr        #
+#    Updated: 2022/12/06 15:43:34 by bkandemi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRC_FILES = main.c\
 			set_player_order.c\
 			read_champs.c\
 			place_champs.c\
-			init_carriages.c
+			init_carriages.c\
+			the_cycle.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ_DIR = ./obj/

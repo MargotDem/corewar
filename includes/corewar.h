@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:26:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/01 13:20:48 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/06 15:47:46 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,12 @@ void	place_champs(unsigned char *arena, t_vm *vm);
 int		add_carriage(t_carriage *carriage, t_dynlist *alst);
 void	init_carriages(t_vm *vm);
 
+/* the_cycle */
+void the_cycle(t_vm *vm, unsigned char *arena);
 
 /* exit */
+void	del_fn(void *content);
 void error_exit(char *err_msg, t_vm *vm);
+
+
 

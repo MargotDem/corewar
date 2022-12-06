@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:11:31 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/29 13:59:33 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/06 15:05:58 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	free_filenames(t_args *args)
 	}
 }
 
-static void	del_fn(void *content)
+void	del_fn(void *content)
 {
 	if (content)
 		free(content);
