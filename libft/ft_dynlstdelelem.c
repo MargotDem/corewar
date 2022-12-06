@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dynlstdelelem.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykot <ykot@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:46:55 by ykot              #+#    #+#             */
-/*   Updated: 2022/10/06 16:58:35 by ykot             ###   ########.fr       */
+/*   Updated: 2022/12/06 22:02:26 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ static void	del_head(t_dynlist *alst, void (*del)(void *))
 
 	temp = alst->head;
 	next = temp->next;
-	ft_dblstdelone(&(temp->prev), del);
-	next->prev = NULL;
+	ft_dblstdelone(&(temp), del);
+	if (next != NULL)
+		next->prev = NULL;
 	alst->head = next;
 	alst->size--;
 }
