@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:39:43 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/06 16:07:29 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/06 22:18:16 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,11 @@ void check(t_vm *vm)
 		the_car = cars->content;
 		next_car = cars->next;
 		if (the_car->last_live == FALSE || vm->cycles_to_die <= 0)
+		{
+			if (vm->carriages.size == 1)
+				vm->winner = the_car->id;
 			ft_dynlstdelelem(&vm->carriages, elem_count, del_fn);
+		}
 		else
 			the_car->last_live = FALSE;
 		elem_count++;
@@ -78,8 +82,8 @@ void check(t_vm *vm)
 		vm->cycles_to_die -= CYCLE_DELTA;
 		vm->checks = 0;
 	}
-	if (cars->content_size == 0)
-		ft_printf("announce winner\n");
+	if (vm->carriages.size == 0)
+		ft_printf("announce winner %d\n", vm->winner);
 }
 
 /*

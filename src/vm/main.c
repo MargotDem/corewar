@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:24:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/06 16:06:53 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/06 22:17:32 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_vm(t_vm *vm)
 	ft_bzero(&vm->champs, sizeof(vm->champs));
 	ft_bzero(&vm->carriages, sizeof(vm->carriages));
 	
-	vm->alive_champ = 0;
+	vm->winner = 0;
 	vm->cycles = 0;
 	vm->cycles_to_die = CYCLE_TO_DIE;
 	
@@ -90,7 +90,7 @@ int	main(int argc, char **argv)
 	if (vm.args.dump_cycle != 0 /*vm.args.dump_cycle == vm.cycles*/) //update later
 		dump(arena);
 	init_carriages(&vm);
-	//the_cycle(&vm, arena);
+	the_cycle(&vm, arena);
 	print_carriages(vm); // just to check, delete later
 	return (0);
 }

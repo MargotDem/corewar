@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:26:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/06 15:47:46 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/06 22:15:22 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_vm
 	t_args		args;
 	t_champ		champs[MAX_PLAYERS];
 	t_dynlist	carriages;
-	int			alive_champ;
+	int			winner;
 	int			cycles;
 	int			cycles_to_die; //if cycles_to_ die > 0 
 	int			checks;
