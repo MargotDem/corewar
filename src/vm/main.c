@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:24:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/03 18:34:44 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/06 14:56:21 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,5 @@ int	main(int argc, char **argv)
 	init_carriages(&vm);
 	//the_cycle();
 	print_carriages(vm); // just to check, delete later
-	ft_printf("cars list size %d \n", vm.carriages.size);
 	return (0);
 }
