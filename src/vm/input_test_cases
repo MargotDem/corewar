@@ -19,3 +19,6 @@
 ./corewar -n 3 player1.cor -n 1 player2.cor
 ./corewar -dump 2000 player1.cor player2.cor
 ./corewar -n player1.cor player2.cor
+./corewar -n 1 player1.cor -dump 2000 player2.cor
+./corewar -n 3 player1.cor -n 1 player2.cor -n
+./corewar player1.cor -n 1 player2.cor -n 2

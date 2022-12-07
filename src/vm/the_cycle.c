@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:39:43 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/06 22:18:16 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/07 11:14:24 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void check(t_vm *vm)
 		vm->checks = 0;
 	}
 	if (vm->carriages.size == 0)
-		ft_printf("announce winner %d\n", vm->winner);
+		ft_printf("Player %d (%s) won\n", vm->winner, vm->champs[vm->winner - 1].name);
 }
 
 /*
