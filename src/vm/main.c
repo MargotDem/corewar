@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:24:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/06 22:17:32 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:48:47 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	parse_args(int argc, char **argv, t_vm *vm)
 {
 	if (argc == 1)
 	{
-		ft_putendl("Print usage here");
+		ft_putendl(USAGE);
 		exit (1);
 	}
 	get_args(argc, argv, vm);

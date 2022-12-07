@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:08:31 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/07 13:02:17 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:49:07 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	get_n_option(char **argv, t_vm *vm, int *i)
 	{
 		champ_num = ft_atoi(argv[*i]);
 		if (!(champ_num > 0 && champ_num < 5))
-			error_exit("print usage here", vm);
+			error_exit(USAGE, vm);
 		vm->args.numbers[vm->args.player_count] = champ_num;
 		(*i)++;
 		if (argv[*i] != NULL && ft_strstr(argv[*i], ".cor") != NULL)
@@ -68,7 +68,7 @@ int	get_args(int argc, char **argv, t_vm *vm)
 		else if (ft_strstr(argv[i], ".cor") != NULL)
 			get_filename(argv, vm, i);
 		else
-			error_exit("Print usage here", vm);
+			error_exit(USAGE, vm);
 		i++;
 	}
 	ft_printf("\n");

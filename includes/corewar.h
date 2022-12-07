@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:26:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/06 22:15:22 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:49:17 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define CYCLE_DELTA			50
 # define NBR_LIVE				21
 # define MAX_CHECKS				10
+
+# define USAGE	"Usage: ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ..."
 
 
 typedef struct s_args
