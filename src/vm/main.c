@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:24:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/07 13:48:47 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:23:46 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,7 @@ void	parse_args(int argc, char **argv, t_vm *vm)
 	set_player_order(vm);
 }
 
-void dump(unsigned char *arena) //hexadecimal format with 32 octets per line.
-{
-	int i;
-	int row;
 
-	i = 0;
-	row = 0;
-	ft_printf("0x0000 :");
-	while (i < MEM_SIZE)
-	{
-		if (i != 0 && i % 32 == 0)
-		{
-			row += 32;
-			ft_printf("\n%#06x :", row);
-		}
-		ft_printf(" %02x", arena[i]); // we can color each player differently
-		i++;
-	}
-	write(1, "\n", 1);
-}
 
 void print_carriages(t_vm vm)
 {
@@ -87,8 +68,8 @@ int	main(int argc, char **argv)
 	print_player_order(vm.args); //delete later
 	read_champs(&vm);
 	place_champs(arena, &vm);
-	if (vm.args.dump_cycle != 0 /*vm.args.dump_cycle == vm.cycles*/) //update later
-		dump(arena);
+	/*if (vm.args.dump_cycle != 0 vm.args.dump_cycle == vm.cycles) //update later
+		dump(arena);*/
 	init_carriages(&vm);
 	the_cycle(&vm, arena);
 	print_carriages(vm); // just to check, delete later

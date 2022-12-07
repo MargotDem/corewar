@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:08:31 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/07 13:49:07 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:32:15 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ static void	get_dump_option(char **argv, t_vm *vm, int *i)
 	vm->args.dump_cycle = ft_atoi(argv[*i]);
 	if (vm->args.dump_cycle > CYCLE_TO_DIE || vm->args.dump_cycle < 0) //check this one Bengisu!!!
 		error_exit("Wrong cycle number", vm);
+	vm->args.dump_flag = TRUE;
 }
 
-int	get_args(int argc, char **argv, t_vm *vm)
+void	get_args(int argc, char **argv, t_vm *vm)
 {
 	int	i;
 
@@ -71,8 +72,6 @@ int	get_args(int argc, char **argv, t_vm *vm)
 			error_exit(USAGE, vm);
 		i++;
 	}
-	ft_printf("\n");
-	return (1);
 }
 
 void	verify_args(t_vm *vm)

@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:39:43 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/07 11:14:24 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:27:22 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,27 @@ void check(t_vm *vm)
 		ft_printf("Player %d (%s) won\n", vm->winner, vm->champs[vm->winner - 1].name);
 }
 
+void	dump(unsigned char *arena) //hexadecimal format with 32 octets per line.
+{
+	int	i;
+	int	row;
+
+	i = 0;
+	row = 0;
+	ft_printf("0x0000 :");
+	while (i < MEM_SIZE)
+	{
+		if (i != 0 && i % 32 == 0)
+		{
+			row += 32;
+			ft_printf("\n%#06x :", row);
+		}
+		ft_printf(" %02x", arena[i]); // we can color each player differently
+		i++;
+	}
+	write(1, "\n", 1);
+}
+
 /*
 	* Increment the cycle counter
 	* Run carriages(execute the opcode or update the carriage struct)
@@ -95,9 +116,15 @@ void the_cycle(t_vm *vm, unsigned char *arena)
 {
 	while (vm->carriages.size != 0)
 	{
+		if (vm->args.dump_flag == TRUE && vm->cycles == vm->args.dump_cycle)
+		{
+			dump(arena);
+			return ;
+		}
 		vm->cycles++;
 		run_carriages(vm, arena);
 		if (vm->cycles % vm->cycles_to_die == 0 || vm->cycles_to_die <= 0)
 			check(vm);
+		
 	}
 }

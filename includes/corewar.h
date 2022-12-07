@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:26:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/07 13:49:17 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:09:04 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_args
 {
 	int		player_count;
 	int		numbers[MAX_PLAYERS];
+	int		dump_flag;
 	int		dump_cycle;
 	char	*filenames[MAX_PLAYERS];
 }			t_args;
@@ -73,7 +74,7 @@ typedef struct s_vm
 
 
 /* parse_args */
-int	get_args(int argc, char **argv, t_vm *vm);
+void	get_args(int argc, char **argv, t_vm *vm);
 void verify_args(t_vm *vm);
 
 /* set_player_order */

@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:10:14 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/18 14:06:59 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:52:05 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void	set_order(t_vm *vm, unsigned short int *table)
 	{
 		if (vm->args.numbers[i] == 0)
 		{
-			j = vm->args.player_count;
-			while (j > 0)
+			j = 1;
+			while (j < vm->args.player_count + 1)
 			{
 				if (table[j] != 1)
 				{
@@ -32,7 +32,7 @@ static void	set_order(t_vm *vm, unsigned short int *table)
 					table[j] = 1;
 					break ;
 				}
-				j--;
+				j++;
 			}
 		}
 		i++;
