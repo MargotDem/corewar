@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:26:48 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/11/23 13:42:06 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:52:10 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,22 @@ static void	parse_champs(t_vm *vm, int *i, unsigned char *buf)
 	if (vm->champs[*i].magic != COREWAR_EXEC_MAGIC)
 		error_exit("Magic header is wrong", vm);
 	ft_memcpy(vm->champs[*i].name, buf + offset, PROG_NAME_LENGTH);
+	if (ft_strlen(vm->champs[*i].name) == 0)
+		error_exit("No name", vm);
 	offset += PROG_NAME_LENGTH;
 	four_byte_null_check(vm, &offset, buf);
 	vm->champs[*i].code_size = bytes_to_int(buf + offset);
 	if (vm->champs[*i].code_size > CHAMP_MAX_SIZE)
-		error_exit("source code size exceeds the limit", vm);
+		error_exit("Source code size exceeds the limit", vm);
 	offset += 4;
 	ft_memcpy(vm->champs[*i].comment, buf + offset, COMMENT_LENGTH);
+	if (ft_strlen(vm->champs[*i].comment) == 0)
+		error_exit("No comment", vm);
 	offset += COMMENT_LENGTH;
 	four_byte_null_check(vm, &offset, buf);
 	ft_memcpy(vm->champs[*i].code, buf + offset, vm->champs[*i].code_size);
+	if (ft_strlen(vm->champs[*i].code) == 0)
+		error_exit("No code", vm);
 }
 
 void	read_champs(t_vm *vm)

@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 09:26:01 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/07 14:09:04 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/08 13:40:55 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,10 @@ void	init_carriages(t_vm *vm);
 
 /* the_cycle */
 void the_cycle(t_vm *vm, unsigned char *arena);
+
+/* print */
+void	print_player_order(t_args args);
+void	print_carriages(t_vm vm);
 
 /* exit */
 void	del_fn(void *content);

@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 15:11:31 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/08 13:44:34 by bkandemi         ###   ########.fr       */
+/*   Created: 2022/12/08 13:37:08 by bkandemi          #+#    #+#             */
+/*   Updated: 2022/12/08 13:40:08 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
 #include "../../includes/corewar.h"
 
-static void	free_filenames(t_args *args)
+void	print_player_order(t_args args)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (i < 4)
 	{
-		ft_strdel(&args->filenames[i]);
+		ft_printf("%d-%s\n", args.numbers[i], args.filenames[i]);
 		i++;
 	}
+	ft_printf("\nplayer count: %d\n\n", args.player_count);
 }
 
-void	del_fn(void *content)
+void	print_carriages(t_vm vm)
 {
-	if (content)
-		free(content);
-}
+	t_dblist	*cars;
+	t_carriage	*the_car;
 
-void	error_exit(char *err_msg, t_vm *vm)
-{
-	free_filenames(&vm->args);
-	ft_putendl_fd(err_msg, 2);
-	if (vm->carriages.head)
-		ft_dblstdel(&vm->carriages, del_fn);
-	exit (1);
+	cars = vm.carriages.head;
+	while (cars != NULL)
+	{
+		the_car = cars->content;
+		ft_printf("car id: %d pos: %d\n carry: %d reg[0]: %d last_live: %d\n\n",
+			the_car->id, the_car->position, the_car->carry,
+			the_car->registers[0], the_car->last_live);
+		cars = cars->next;
+	}
 }

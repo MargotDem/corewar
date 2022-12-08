@@ -6,20 +6,20 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:39:43 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/07 14:27:22 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:51:16 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
 #include "../../includes/corewar.h"
 
-/* 
+/*
 	* Set the new opcode if it is time
 	* Reduce the remaining_cycles
 	* Execute the opcode if it is time and update the position of the carriage
 	* If the carriage executes live statement, set the carraige->last_live flag to TRUE
 */
-void run_carriages(t_vm *vm, unsigned char *arena)
+void	run_carriages(t_vm *vm, unsigned char *arena)
 {
 	t_dblist	*cars;
 	t_carriage	*the_car;
@@ -52,13 +52,13 @@ void run_carriages(t_vm *vm, unsigned char *arena)
 	* Reduce cycles_to_die value
 	* If there are no carriages anymore, announce the winner
 */
-void check(t_vm *vm)
+void	check(t_vm *vm)
 {
 	t_dblist	*cars;
 	t_carriage	*the_car;
 	size_t		elem_count;
 	t_dblist	*next_car;
-	
+
 	vm->checks++;
 	cars = vm->carriages.head;
 	elem_count = 0;
@@ -83,7 +83,8 @@ void check(t_vm *vm)
 		vm->checks = 0;
 	}
 	if (vm->carriages.size == 0)
-		ft_printf("Player %d (%s) won\n", vm->winner, vm->champs[vm->winner - 1].name);
+		ft_printf("Player %d (%s) won\n",
+			vm->winner, vm->champs[vm->winner - 1].name);
 }
 
 void	dump(unsigned char *arena) //hexadecimal format with 32 octets per line.
@@ -112,7 +113,7 @@ void	dump(unsigned char *arena) //hexadecimal format with 32 octets per line.
 	* Run carriages(execute the opcode or update the carriage struct)
 	* Do the check-up
 */
-void the_cycle(t_vm *vm, unsigned char *arena)
+void	the_cycle(t_vm *vm, unsigned char *arena)
 {
 	while (vm->carriages.size != 0)
 	{
@@ -125,6 +126,5 @@ void the_cycle(t_vm *vm, unsigned char *arena)
 		run_carriages(vm, arena);
 		if (vm->cycles % vm->cycles_to_die == 0 || vm->cycles_to_die <= 0)
 			check(vm);
-		
 	}
 }

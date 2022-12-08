@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:08:31 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/07 15:32:15 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:53:15 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 static void	get_filename(char **argv, t_vm *vm, int i)
 {
+	char	*filename;
+
+	filename = ft_strstr(argv[i], ".cor");
+	if (filename[4] != '\0')
+		error_exit("Wrong file name", vm);
 	vm->args.filenames[vm->args.player_count] = ft_strdup(argv[i]);
 	if (vm->args.filenames[vm->args.player_count] == NULL)
 		error_exit("Memory allocation", vm);
@@ -83,11 +88,12 @@ void	verify_args(t_vm *vm)
 	while (i < 4)
 	{
 		if (vm->args.numbers[i] > vm->args.player_count)
-			error_exit("Given player number is more than the player number", vm);
+			error_exit("Wrong nbr for -n flag", vm);
 		j = i + 1;
 		while (j < 4)
 		{
-			if (vm->args.numbers[i] == vm->args.numbers[j] && vm->args.numbers[i] != 0)
+			if (vm->args.numbers[i] == vm->args.numbers[j]
+				&& vm->args.numbers[i] != 0)
 				error_exit("Two players have same number", vm);
 			j++;
 		}
