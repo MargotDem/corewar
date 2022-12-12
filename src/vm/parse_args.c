@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:08:31 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/08 16:53:15 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/12 09:34:59 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ static void	get_dump_option(char **argv, t_vm *vm, int *i)
 {
 	(*i)++;
 	if (!ft_isint(argv[*i]))
-		error_exit("Dump cycle is not integer", vm);
+		error_exit("Dump cycle is not an integer", vm);
 	vm->args.dump_cycle = ft_atoi(argv[*i]);
-	if (vm->args.dump_cycle > CYCLE_TO_DIE || vm->args.dump_cycle < 0) //check this one Bengisu!!!
-		error_exit("Wrong cycle number", vm);
+	if (vm->args.dump_cycle < 0)
+		error_exit("Invalid cycle number", vm);
 	vm->args.dump_flag = TRUE;
 }
 

@@ -6,7 +6,7 @@
 /*   By: bkandemi <bkandemi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:39:43 by bkandemi          #+#    #+#             */
-/*   Updated: 2022/12/08 16:51:16 by bkandemi         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:59:19 by bkandemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	check(t_vm *vm)
 			if (vm->carriages.size == 1)
 				vm->winner = the_car->id;
 			ft_dynlstdelelem(&vm->carriages, elem_count, del_fn);
+			elem_count--;
 		}
 		else
 			the_car->last_live = FALSE;
